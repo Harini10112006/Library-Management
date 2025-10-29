@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borrow History List - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      margin: 0;
+      padding: 0;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 30px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      background: rgba(255,255,255,0.15);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: rgba(0,0,0,0.3);
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    a.button {
+      background-color: #4e4376;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 20px 10px;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    a.button:hover {
+      background-color: #2b5876;
+    }
+
+    .nav-buttons {
+      margin: 20px;
+    }
+
+    .actions a {
+      color: #fff;
+      margin: 0 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .actions a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Borrow History List</h1>
+
+  <div class="nav-buttons">
+    <a href="/history/form" class="button">+ Add History</a>
+    <a href="/" class="button">🏠 Home</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Book Title</th>
+        <th>Issue Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="h : ${history}">
+        <td th:text="${h.id}"></td>
+        <td th:text="${h.userName}"></td>
+        <td th:text="${h.bookTitle}"></td>
+        <td th:text="${h.issueDate}"></td>
+        <td th:text="${h.returnDate}"></td>
+        <td th:text="${h.status}"></td>
+        <td class="actions">
+          <a th:href="@{/history/form?id={id}(id=${h.id})}">Edit</a> |
+          <a th:href="@{'/history/delete/' + ${h.id}}" onclick="return confirm('Delete this record?')">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

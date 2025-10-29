@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Form - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #89253e, #3a6186);
+      margin: 0;
+      padding: 0;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 48%;
+      background: #ffb347;
+      color: black;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 10px 1%;
+      transition: 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: #ffd479;
+      transform: scale(1.05);
+    }
+
+    .btn-group {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>📅 Book Reservation Form</h2>
+    <form th:action="@{/reservations}" th:object="${reservation}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label for="userName">User Name:</label>
+      <input type="text" id="userName" th:field="*{userName}" required>
+
+      <label for="bookTitle">Book Title:</label>
+      <input type="text" id="bookTitle" th:field="*{bookTitle}" required>
+
+      <label for="reservationDate">Reservation Date:</label>
+      <input type="date" id="reservationDate" th:field="*{reservationDate}" required>
+
+      <label for="status">Status:</label>
+      <select id="status" th:field="*{status}" required>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Collected">Collected</option>
+      </select>
+
+      <div class="btn-group">
+        <button type="submit" class="btn">💾 Save</button>
+        <a th:href="@{/reservations/list}" class="btn">↩️ Back</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
