@@ -20,9 +20,18 @@ public class IssueController {
         return "issue/list";
     }
 
+    @GetMapping("/list")
+    public String listIssuesAlt(Model model) {
+        return listIssues(model);
+    }
+
     @GetMapping("/form")
-    public String showForm(Model model) {
-        model.addAttribute("issue", new Issue());
+    public String showForm(@RequestParam(required = false) Long id, Model model) {
+        if (id != null) {
+            model.addAttribute("issue", issueRepository.findById(id).orElse(new Issue()));
+        } else {
+            model.addAttribute("issue", new Issue());
+        }
         return "issue/form";
     }
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borrow History Form - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      margin: 0;
+      padding: 0;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      width: 400px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #fff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4e4376;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2b5876;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Borrow History Form</h2>
+    <form th:action="@{/history}" th:object="${record}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label>User Name:</label>
+      <input type="text" th:field="*{userName}" placeholder="Enter user name" required>
+
+      <label>Book Title:</label>
+      <input type="text" th:field="*{bookTitle}" placeholder="Enter book title" required>
+
+      <label>Issue Date:</label>
+      <input type="date" th:field="*{issueDate}" required>
+
+      <label>Return Date:</label>
+      <input type="date" th:field="*{returnDate}" required>
+
+      <label>Status:</label>
+      <select th:field="*{status}">
+        <option value="Returned">Returned</option>
+        <option value="Overdue">Overdue</option>
+      </select>
+
+      <button type="submit">Save</button>
+      <a href="/history/list">← Back to List</a>
+    </form>
+  </div>
+</body>
+</html>

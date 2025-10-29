@@ -13,8 +13,9 @@ public class History {
 
     private String userName;
     private String bookTitle;
-    private LocalDate borrowedDate;
-    private LocalDate returnedDate;
+    private LocalDate issueDate;
+    private LocalDate returnDate;
+    private String status;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -22,8 +23,10 @@ public class History {
     public void setUserName(String userName) { this.userName = userName; }
     public String getBookTitle() { return bookTitle; }
     public void setBookTitle(String bookTitle) { this.bookTitle = bookTitle; }
-    public LocalDate getBorrowedDate() { return borrowedDate; }
-    public void setBorrowedDate(LocalDate borrowedDate) { this.borrowedDate = borrowedDate; }
-    public LocalDate getReturnedDate() { return returnedDate; }
-    public void setReturnedDate(LocalDate returnedDate) { this.returnedDate = returnedDate; }
+    public LocalDate getIssueDate() { return issueDate; }
+    public void setIssueDate(LocalDate issueDate) { this.issueDate = issueDate; }
+    public LocalDate getReturnDate() { return returnDate; }
+    public void setReturnDate(LocalDate returnDate) { this.returnDate = returnDate; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

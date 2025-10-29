@@ -20,9 +20,18 @@ public class BookController {
         return "book/list";
     }
 
+    @GetMapping("/list")
+    public String listBooksAlt(Model model) {
+        return listBooks(model);
+    }
+
     @GetMapping("/form")
-    public String showBookForm(Model model) {
-        model.addAttribute("book", new Book());
+    public String showBookForm(@RequestParam(required = false) Long id, Model model) {
+        if (id != null) {
+            model.addAttribute("book", bookRepository.findById(id).orElse(new Book()));
+        } else {
+            model.addAttribute("book", new Book());
+        }
         return "book/form";
     }
 

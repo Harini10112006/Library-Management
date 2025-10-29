@@ -19,14 +19,29 @@ public class HistoryController {
         return "history/list";
     }
 
+    @GetMapping("/list")
+    public String listHistoryAlt(Model model) {
+        return listHistory(model);
+    }
+
     @GetMapping("/form")
-    public String form(Model model) {
-        model.addAttribute("record", new History());
+    public String form(@RequestParam(required = false) Long id, Model model) {
+        if (id != null) {
+            model.addAttribute("record", historyRepository.findById(id).orElse(new History()));
+        } else {
+            model.addAttribute("record", new History());
+        }
         return "history/form";
     }
     @PostMapping
     public String save(@ModelAttribute("record") History record) {
         historyRepository.save(record);
+        return "redirect:/history";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        historyRepository.deleteById(id);
         return "redirect:/history";
     }
 }

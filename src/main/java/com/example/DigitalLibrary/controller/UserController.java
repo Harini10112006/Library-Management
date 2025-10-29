@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String listUsers(Model model){
         model.addAttribute("users",userService.getAllUsers());
         return "user/list";
@@ -32,13 +32,13 @@ public class UserController {
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user) {
         userService.saveUser(user);
-        return "redirect:/users";
+        return "redirect:/users/list";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/users/list";
     }
 
     

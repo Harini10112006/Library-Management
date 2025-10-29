@@ -21,11 +21,26 @@ public class ReservationController {
         return "reservation/list";
     }
 
+    @GetMapping("/list")
+    public String listReservationsAlt(Model model){
+        return listReservations(model);
+    }
+
      @GetMapping("/form")
-    public String showForm(Model model) {
-        model.addAttribute("reservation", new Reservation());
+    public String showForm(@RequestParam(required = false) Long id, Model model) {
+        if (id != null) {
+            model.addAttribute("reservation", reservationRepository.findById(id).orElse(new Reservation()));
+        } else {
+            model.addAttribute("reservation", new Reservation());
+        }
         return "reservation/form";
-    }  
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editReservation(@PathVariable Long id, Model model) {
+        model.addAttribute("reservation", reservationRepository.findById(id).orElse(new Reservation()));
+        return "reservation/form";
+    }
 
     @PostMapping
     public String saveReservation (@ModelAttribute("reservation") Reservation reservation){
