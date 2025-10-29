@@ -1,5 +1,9 @@
 package com.example.DigitalLibrary.service;
 
-public class HistoryService {
+import com.example.DigitalLibrary.entities.History;
+import java.util.List;
+    public interface HistoryService {
+    List<History> getAllHistory();
+    History saveHistory(History history);
     
 }
