@@ -1,5 +1,5 @@
 package com.example.DigitalLibrary.repository;
 
-public class UserReservation {
+public class ReservationRepository {
     
 }
