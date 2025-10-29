@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add / Edit Book - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1em;
+    }
+
+    label {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+      color: #222;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>📘 Book Form</h1>
+
+    <form th:action="@{/books}" th:object="${book}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label>Title:</label>
+      <input type="text" th:field="*{title}" placeholder="Enter Book Title" required />
+
+      <label>Author:</label>
+      <input type="text" th:field="*{author}" placeholder="Enter Author Name" required />
+
+      <label>Category:</label>
+      <input type="text" th:field="*{category}" placeholder="Enter Category" required />
+
+      <label>ISBN:</label>
+      <input type="text" th:field="*{isbn}" placeholder="Enter ISBN" required />
+
+      <label>Available:</label>
+      <select th:field="*{available}">
+        <option th:value="true">Yes</option>
+        <option th:value="false">No</option>
+      </select>
+
+      <button type="submit" class="btn">💾 Save Book</button>
+    </form>
+
+    <a href="/books/list">⬅ Back to Book List</a>
+  </div>
+
+</body>
+</html>

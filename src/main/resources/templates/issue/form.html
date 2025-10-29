@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Form - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #182848, #4b6cb7);
+      margin: 0;
+      padding: 0;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 48%;
+      background: #00eaff;
+      color: black;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 10px 1%;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #66f3ff;
+      transform: scale(1.05);
+    }
+
+    .btn-group {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>📖 Issue Book Form</h2>
+    <form th:action="@{/issues}" th:object="${issue}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <label for="userName">User Name:</label>
+      <input type="text" id="userName" th:field="*{userName}" required>
+
+      <label for="bookTitle">Book Title:</label>
+      <input type="text" id="bookTitle" th:field="*{bookTitle}" required>
+
+      <label for="issueDate">Issue Date:</label>
+      <input type="date" id="issueDate" th:field="*{issueDate}" required>
+
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" th:field="*{dueDate}" required>
+
+      <div class="btn-group">
+        <button type="submit" class="btn">💾 Save</button>
+        <a th:href="@{/issues/list}" class="btn">↩️ Back</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

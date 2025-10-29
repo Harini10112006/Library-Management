@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add / Edit User - Digital Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      color: white;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      outline: none;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.3);
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: rgba(255,255,255,0.6);
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      text-align: center;
+      color: #ddd;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2 th:text="${user.id == null} ? '➕ Add User' : '✏️ Edit User'"></h2>
+    <form th:action="@{/users/save}" th:object="${user}" method="post">
+      <input type="hidden" th:field="*{id}">
+      <input type="text" th:field="*{name}" placeholder="Full Name" required>
+      <input type="email" th:field="*{email}" placeholder="Email Address" required>
+      <input type="password" th:field="*{password}" placeholder="Password" required>
+      <select th:field="*{role}" required>
+        <option value="">Select Role</option>
+        <option value="Student">Student</option>
+        <option value="Faculty">Faculty</option>
+        <option value="Librarian">Librarian</option>
+      </select>
+      <button type="submit">💾 Save</button>
+    </form>
+    <a href="/users/list">⬅️ Back to User List</a>
+  </div>
+</body>
+</html>
